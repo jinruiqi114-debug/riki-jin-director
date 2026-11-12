@@ -1,5 +1,7 @@
 # riki-midjourney
 
+中文 | [English](README.en.md)
+
 **Midjourney 提示词分析 Skill。** 把一条现成的 MJ 静态图像提示词（或一张参考图）拆成可读的视觉结构，说清它到底会生成什么、哪些是原文写明的、哪些是推断出来的、哪些根本没写，最后给出一条可直接复制测试的中文试验提示词。
 
 它不做创作，也不做评判。默认只回答"这条提示词在描述什么"，不回答"这条提示词好不好"。
@@ -211,6 +213,8 @@ aviator sunglasses pushed up onto the brim ... authentic Chinese casting
 
 ```text
 riki-midjourney/
+├── README.md                                 # 中文说明（本文件）
+├── README.en.md                              # English version
 ├── SKILL.md                                  # 任务边界、执行流程、固定输出格式
 ├── references/
 │   ├── midjourney-prompt-decomposition.md    # 十维拆解定义与中文试验版规则
