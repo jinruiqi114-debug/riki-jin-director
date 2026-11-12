@@ -1,5 +1,5 @@
 ---
-name: riki-midjourney-skill
+name: riki-midjourney
 description: Midjourney 提示词分析工具。用于客观拆解现成的 Midjourney 静态图像提示词或参考图片，分析主体、影调、质感、真实感、光影、色彩、构图、拍摄视角、镜头与焦距、透视、景深、情绪、环境和参数，并生成中文试验提示词；用户回复 ok 后输出英文完整版。
 ---
 

@@ -1,4 +1,4 @@
-# riki-midjourney-skill
+# riki-midjourney
 
 Riki Jin Midjourney 提示词分析 Skill。用于客观拆解现成的 Midjourney 静态图像提示词，也可以根据参考图片反向拆解视觉维度，并生成中文版试验提示词。
 
