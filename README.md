@@ -98,6 +98,115 @@ seamless medium gray studio background. Mature battle hardened Chinese general..
 这条提示词出的图总是没有蓝调，帮我排查原因，并给出完整修改版。
 ```
 
+## 拆解示例（前后对比）
+
+以下三段来自真实使用记录，只保留与问题相关的片段。
+
+### 示例一：为什么这条提示词出不了蓝调
+
+**输入（节选）**
+
+```text
+seamless medium gray studio background ... Aged bronze, antique gold, faded vermilion,
+charcoal, ivory palette against deep black. 1990s Hong Kong wuxia film aesthetic,
+soft diffused studio lighting, warm highlights, low saturation, fine film grain.
+```
+
+**拆解结论**
+
+| 维度 | 发现 | 状态 |
+| --- | --- | --- |
+| 影调 | 背景为中灰，高光指定为暖，五个颜色全为暖或中性，整条提示词没有一个冷色来源 | 明确 |
+| 光影 | 全面漫射且未指定光位，人物与马会平贴在背景上，骨相与金属厚度读不出来 | 推断 |
+| 色彩 | 暗部只写了"中性、略冷"，这个程度的冷在 MJ 里会被渲染成中性灰 | 推断 |
+| 缺失 | 光源方向、黑位倾向、冷暖分离的具体方式 | 缺失 |
+
+**改后**
+
+```text
+medium gray studio backdrop cooling into blue-gray toward the edges ...
+a cold blue-grey moonlight from high behind-right rimming the rider's shoulder and the horse's neck ...
+shadows sinking into low-saturation slate blue instead of black,
+lifted film blacks with a faint blue-green cast,
+low saturation with a clear warm-cool split
+```
+
+**改动对照**
+
+| 原词 | 改为 | 原因 |
+| --- | --- | --- |
+| `medium gray backdrop` | `cooling into blue-gray toward the edges` | 让背景本身承担一部分冷色 |
+| `soft diffused lighting, warm highlights` | 追加 `cold blue-grey moonlight from high behind-right` | 冷色必须落到一个具体光源上，靠形容词暗示不出来 |
+| `neutral and slightly cool` shadows | `sinking into low-saturation slate blue` | "略冷"在 MJ 里等于中性 |
+| 无 | 明确写出 `clear warm-cool split` | 低饱和下没有冷暖分离，画面只会整体发灰 |
+
+### 示例二：全身 + 骑马，竖幅装不下
+
+**输入**
+
+```text
+Full body portrait, head to toes, frontal to camera, centered vertical composition ...
+```
+
+**拆解结论**
+
+| 维度 | 发现 | 状态 |
+| --- | --- | --- |
+| 构图 | 竖幅内人物头顶到脚趾已占画面高度约 85–90%，没有余量放下一匹马 | 推断 |
+| 空间关系 | 若人马同时正面朝向镜头，马头会遮住躯干与腹甲 | 推断 |
+| 缺失 | 马头的朝向、马身入画范围、手持缰绳的动作 | 缺失 |
+
+**改后**
+
+```text
+Full body portrait of a mounted rider, head to toes, frontal to camera,
+centered vertical composition ...
+Black horse in three-quarter turn, head and neck angled slightly to one side of frame ...
+hands resting loosely on leather reins ...
+```
+
+**改动对照**
+
+| 原词 | 改为 | 原因 |
+| --- | --- | --- |
+| 单人全身 | 人物全身，马只入画头、颈、前胸 | 竖幅容不下马全身，马身必须出画 |
+| 人马均正面 | 人物正面，马 3/4 侧转 | 避免马头遮挡躯干 |
+| 无手部描述 | `hands resting loosely on leather reins` | 骑马必须有缰绳才成立 |
+
+### 示例三：写了 Asian，出图仍是西方面孔
+
+**输入（节选）**
+
+```text
+A single East Asian man in his thirties ... aviator sunglasses ...
+worn military-surplus clothing ...
+```
+
+**拆解结论**
+
+| 维度 | 发现 | 状态 |
+| --- | --- | --- |
+| 主体与特征 | `Asian` 只出现一次，后面八十多个词全是西式军装与装备 | 明确 |
+| 道具 | 墨镜遮住眼睛，而眼睛是族裔最直接的识别点 | 推断 |
+| 缺失 | 具体骨相特征（眼型、面中、鼻根、发质） | 缺失 |
+
+**改后**
+
+```text
+A single Chinese man in his mid to late twenties, Han Chinese, unmistakably from mainland China ...
+Han Chinese face: broad cheekbones, a squarish jaw, monolid eyes with an epicanthic fold,
+thick straight black eyebrows, a low straight nose bridge ... straight black hair ...
+aviator sunglasses pushed up onto the brim ... authentic Chinese casting
+```
+
+**改动对照**
+
+| 原词 | 改为 | 原因 |
+| --- | --- | --- |
+| `East Asian` | `Chinese` / `Han Chinese`，首尾各一次 | `East Asian` 权重分散，容易漂向日韩或泛亚混血 |
+| 无骨相描述 | 单眼皮、内眦赘皮、方颌、山根低、黑直发 | 族裔要靠骨相锚定，只写一个标签不够 |
+| 墨镜戴着 | `pushed up onto the brim` | 遮住眼睛会立刻丢掉族裔特征 |
+
 ## 目录结构
 
 ```text
